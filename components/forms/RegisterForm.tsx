@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { get, post } from "@/libs/axios";
 import { ApiResponse, RegisterRequest, RegisterResponse } from "@/types";
+import { passwordSchema } from "@/utils/validators";
 // Validators are inlined in the schema below
 
 /**
@@ -48,7 +49,7 @@ const registerSchema = z
       .min(5, "Alamat minimal 5 karakter")
       .optional()
       .nullable(),
-    password: z.string().min(6, "Password minimal 6 karakter"),
+    password: passwordSchema,
     confirmPassword: z.string().min(1, "Konfirmasi password wajib diisi"),
     rt: z.number().int().positive().optional().nullable(),
     rw: z.number().int().positive({ message: "RW wajib dipilih" }),
@@ -136,6 +137,7 @@ export const RegisterForm: React.FC = () => {
         label="Nama Lengkap"
         placeholder="Masukkan nama lengkap"
         error={errors.name?.message}
+        className="text-gray-600"
         fullWidth
         required
       />
@@ -147,6 +149,7 @@ export const RegisterForm: React.FC = () => {
         label="Email (Opsional)"
         placeholder="contoh@email.com"
         error={errors.email?.message}
+        className="text-gray-600"
         fullWidth
       />
 
@@ -157,6 +160,7 @@ export const RegisterForm: React.FC = () => {
         label="Nomor Telepon (Opsional)"
         placeholder="08xxxxxxxxxx"
         error={errors.phone?.message}
+        className="text-gray-600"
         fullWidth
       />
 
@@ -166,6 +170,7 @@ export const RegisterForm: React.FC = () => {
         type="text"
         label="Alamat (Opsional)"
         placeholder="Masukkan alamat lengkap"
+        className="text-gray-600"
         error={errors.alamat?.message}
         fullWidth
       />
@@ -178,13 +183,13 @@ export const RegisterForm: React.FC = () => {
         <select
           {...register("rw", { valueAsNumber: true })}
           disabled={isLoadingRw}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-gray-400"
         >
           <option value="">
             {isLoadingRw ? "Memuat data RW..." : "Pilih RW"}
           </option>
           {rwList.map((rw) => (
-            <option key={rw.rw_id} value={rw.rw_id}>
+            <option key={rw.rw_id} value={rw.rw_id} className="text-gray-600">
               {rw.name}
             </option>
           ))}
@@ -200,6 +205,7 @@ export const RegisterForm: React.FC = () => {
         type="number"
         label="RT (Opsional)"
         placeholder="Masukkan RT"
+        className="text-gray-600"
         error={errors.rt?.message}
         fullWidth
       />
@@ -210,6 +216,7 @@ export const RegisterForm: React.FC = () => {
         type="password"
         label="Password"
         placeholder="Minimal 6 karakter"
+        className="text-gray-600"
         error={errors.password?.message}
         fullWidth
         required
@@ -221,6 +228,7 @@ export const RegisterForm: React.FC = () => {
         type="password"
         label="Konfirmasi Password"
         placeholder="Masukkan ulang password"
+        className="text-gray-600"
         error={errors.confirmPassword?.message}
         fullWidth
         required

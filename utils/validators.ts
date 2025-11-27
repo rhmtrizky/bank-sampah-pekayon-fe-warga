@@ -22,6 +22,11 @@ export const emailSchema = z
   .email("Format email tidak valid");
 
 /**
+ * Identifier schema for login: accepts either an email or an Indonesian phone number
+ */
+export const identifierSchema = z.union([emailSchema, phoneSchema]);
+
+/**
  * Password validator (min 8 chars, must contain letter and number)
  */
 export const passwordSchema = z
