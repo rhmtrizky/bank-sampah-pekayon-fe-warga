@@ -82,6 +82,7 @@ axiosInstance.interceptors.response.use(
 /**
  * Type-safe GET request
  */
+
 export async function get<T>(url: string): Promise<T> {
   const response = await axiosInstance.get<T>(url);
   return response.data;
