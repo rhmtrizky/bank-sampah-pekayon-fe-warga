@@ -10,7 +10,7 @@ import { ApiError } from "@/types";
  * Base API URL from environment or default
  */
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://m0bnqlsf-5000.asse.devtunnels.ms/api";
 
 /**
  * Configured axios instance with interceptors

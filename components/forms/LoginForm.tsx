@@ -12,14 +12,14 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useAuthStore } from "@/store/authStore";
-import { emailSchema, passwordSchema } from "@/utils/validators";
+import { identifierSchema, passwordSchema } from "@/utils/validators";
 
 /**
  * Login form schema validation
  */
 const loginSchema = z.object({
-  emailOrPhone: emailSchema,
-  password: z.string().min(1, "Password wajib diisi"),
+  emailOrPhone: identifierSchema,
+  password: passwordSchema
 });
 
 /**
@@ -72,6 +72,7 @@ export const LoginForm: React.FC = () => {
         label="Email atau Nomor Telepon"
         placeholder="contoh@email.com atau 08xxxxxxxxxx"
         error={errors.emailOrPhone?.message}
+        className="text-gray-600"
         fullWidth
         required
         leftIcon={
@@ -98,6 +99,7 @@ export const LoginForm: React.FC = () => {
         label="Password"
         placeholder="Masukkan password"
         error={errors.password?.message}
+        className="text-gray-600"
         fullWidth
         required
         leftIcon={
