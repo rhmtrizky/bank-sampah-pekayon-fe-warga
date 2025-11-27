@@ -136,7 +136,6 @@ export default function HomePage() {
             
             {/* Left Column: Main Hero & Actions (8 cols) */}
             <div className="lg:col-span-8 space-y-8">
-              to
               {/* Hero Balance Card */}
               <div className="relative overflow-hidden bg-linear-to-br from-green-600 to-emerald-800 rounded-4xl p-8 text-white shadow-xl shadow-green-600/10">
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>

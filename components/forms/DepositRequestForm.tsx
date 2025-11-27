@@ -155,7 +155,7 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
         setIsUploadingPhoto(true);
         const fd = new FormData();
         // Common backend field name for image uploads
-        fd.append("image", file);
+        fd.append("file", file);
         const resp = await post<{ url?: string; data?: { url?: string } }>(
           "/upload/image",
           fd
