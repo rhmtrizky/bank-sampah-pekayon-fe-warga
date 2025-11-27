@@ -16,7 +16,7 @@ export interface DepositRequest {
   request_id: number;
   user_id: number;
   rw_id: number;
-  photo: string | null;
+  photoUrl: string | null;
   status: DepositRequestStatus;
   scheduled_date: string | null;
   created_at: string;
@@ -78,7 +78,7 @@ export interface DepositRequestItem {
  */
 export interface CreateDepositRequest {
   items: DepositRequestItem[];
-  photo?: File;
+  photoUrl?: File;
 }
 
 /**

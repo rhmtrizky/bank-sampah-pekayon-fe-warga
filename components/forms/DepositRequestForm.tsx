@@ -10,7 +10,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/Button";
-import { get } from "@/libs/axios";
+import { get, post } from "@/libs/axios";
 import { ApiResponse } from "@/types";
 
 /**
@@ -79,7 +79,7 @@ const depositRequestSchema = z.object({
 type DepositRequestFormData = z.infer<typeof depositRequestSchema>;
 
 interface DepositRequestFormProps {
-  onSubmit: (data: DepositRequestFormData, photo?: File) => Promise<void>;
+  onSubmit: (data: DepositRequestFormData, photoUrl?: string) => Promise<void>;
   isLoading?: boolean;
   rwId: string;
 }
@@ -91,6 +91,8 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
 }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [photoFile, setPhotoFile] = useState<File | undefined>();
+  const [photoUrl, setPhotoUrl] = useState<string | undefined>();
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState<boolean>(false);
   const [priceList, setPriceList] = useState<PriceList[]>([]);
   const [isLoadingWasteTypes, setIsLoadingWasteTypes] = useState(true);
 
@@ -146,6 +148,32 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
       setImagePreview(reader.result as string);
     };
     reader.readAsDataURL(file);
+
+    // Kick off upload to /upload/image
+    void (async () => {
+      try {
+        setIsUploadingPhoto(true);
+        const fd = new FormData();
+        // Common backend field name for image uploads
+        fd.append("image", file);
+        const resp = await post<{ url?: string; data?: { url?: string } }>(
+          "/upload/image",
+          fd
+        );
+        // Support {url} or {data:{url}}
+        const url = (resp as any)?.url ?? (resp as any)?.data?.url;
+        if (typeof url === "string" && url.length > 0) {
+          setPhotoUrl(url);
+        } else {
+          console.warn("Upload image: URL not found in response", resp);
+        }
+      } catch (err) {
+        console.error("Upload image failed:", err);
+        setPhotoUrl(undefined);
+      } finally {
+        setIsUploadingPhoto(false);
+      }
+    })();
   };
 
   /**
@@ -154,7 +182,7 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
   const handleFormSubmit = async (
     data: DepositRequestFormData
   ): Promise<void> => {
-    await onSubmit(data, photoFile);
+    await onSubmit(data, photoUrl);
   };
 
   console.log("photoFile", photoFile);
@@ -269,7 +297,9 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
         />
         <p className="mt-1 text-sm text-gray-500">
-          Upload 1 foto untuk semua item sampah
+          {isUploadingPhoto
+            ? "Mengunggah foto..."
+            : "Upload 1 foto untuk semua item sampah"}
         </p>
       </div>
 
@@ -287,6 +317,7 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
             onClick={() => {
               setImagePreview(null);
               setPhotoFile(undefined);
+              setPhotoUrl(undefined);
             }}
             className="mt-2 text-sm text-red-600 hover:text-red-700"
           >
@@ -323,7 +354,12 @@ export const DepositRequestForm: React.FC<DepositRequestFormProps> = ({
       </div>
 
       {/* Submit button */}
-      <Button type="submit" fullWidth isLoading={isLoading}>
+      <Button
+        type="submit"
+        fullWidth
+        isLoading={isLoading || isUploadingPhoto}
+        disabled={isUploadingPhoto}
+      >
         Kirim Request
       </Button>
     </form>

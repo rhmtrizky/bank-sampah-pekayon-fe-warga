@@ -210,14 +210,14 @@ export default function DepositRequestDetailPage() {
             </Card>
 
             {/* Photo */}
-            {request.photo && (
+            {request.photoUrl && (
               <Card>
                 <CardBody>
                   <h3 className="text-sm font-medium text-gray-500 mb-3">
                     Foto Sampah
                   </h3>
                   <img
-                    src={request.photo}
+                    src={request.photoUrl}
                     alt="Foto sampah"
                     className="w-full rounded-lg"
                   />

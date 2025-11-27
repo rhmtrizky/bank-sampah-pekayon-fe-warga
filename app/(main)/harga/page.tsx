@@ -24,7 +24,7 @@ export default function HargaPage() {
 
   // Fetch price list for user's RW
   const { data, isLoading, error } = useSWR<ApiResponse<PriceItem[]>>(
-    user?.rw_id ? `/price-list/rw/${user.rw_id}` : null,
+    user?.rw ? `/price-list/rw/${user.rw}` : null,
     fetcher
   );
 
@@ -129,7 +129,7 @@ export default function HargaPage() {
         )}
 
         {/* Content */}
-        {!user?.rw_id ? (
+        {!user?.rw ? (
           <Card>
             <CardBody>
               <div className="text-center py-12">

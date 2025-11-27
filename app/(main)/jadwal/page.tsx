@@ -23,7 +23,7 @@ export default function JadwalPage() {
 
   // Fetch schedules for user's RW
   const { data, isLoading, error } = useSWR<ApiResponse<Schedule[]>>(
-    user?.rw_id ? `/schedules/rw/${user.rw_id}` : null,
+    user?.rw ? `/schedules/rw/${user.rw}` : null,
     fetcher
   );
 
@@ -86,7 +86,7 @@ export default function JadwalPage() {
         </div>
 
         {/* Content */}
-        {!user?.rw_id ? (
+        {!user?.rw ? (
           <Card>
             <CardBody>
               <div className="text-center py-12">

@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
             <div className="flex items-center gap-2">
               <div className="text-right">
                 <p className="text-sm font-medium text-gray-900">
-                  {user?.nama || "User"}
+                  {user?.name || "User"}
                 </p>
                 <p className="text-xs text-gray-500">Warga</p>
               </div>
