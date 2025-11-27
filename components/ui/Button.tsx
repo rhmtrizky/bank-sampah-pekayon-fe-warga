@@ -68,11 +68,11 @@ export const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   disabled,
   children,
-  className = "",
+  className = "cursor-pointer",
   ...props
 }) => {
   const baseClasses =
-    "font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60";
+    "font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60 ";
 
   const variantClasses = getVariantClasses(variant);
   const sizeClasses = getSizeClasses(size);
