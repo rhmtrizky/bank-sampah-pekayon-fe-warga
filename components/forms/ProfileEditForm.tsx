@@ -57,6 +57,7 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = ({
         {...register("name")}
         label="Nama Lengkap"
         placeholder="John Doe"
+        className="text-gray-600"
         error={errors.name?.message}
         required
         fullWidth
@@ -94,7 +95,7 @@ export const ProfileEditForm: React.FC<ProfileEditFormProps> = ({
         <textarea
           {...register("alamat")}
           rows={3}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-600"
           placeholder="Alamat lengkap..."
         />
         {errors.alamat && (
