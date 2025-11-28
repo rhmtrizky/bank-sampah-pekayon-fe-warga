@@ -38,20 +38,12 @@ export default function CreateDepositRequestPage() {
     console.log("Submitting deposit request:", data, photoUrl);
 
     try {
-      const formData = new FormData();
-
-      // Add rw_id from user context
-      formData.append("rw_id", user.rw.toString());
-
-      // Add items as JSON string
-      formData.append("items", JSON.stringify(data.items));
-
-      // Add photo_url if provided
-      if (photoUrl) {
-        formData.append("photo_url", photoUrl);
-      }
-
-      await post<ApiResponse<DepositRequest>>("/deposit-request", formData);
+      const newDeposit = {
+        rw_id: user.rw,
+        items: data.items,
+        photo_url: photoUrl,
+      };
+      await post<ApiResponse<DepositRequest>>("/deposit-request", newDeposit);
 
       // Success - redirect to list
       router.push("/setor-online?success=true");

@@ -210,14 +210,14 @@ export default function DepositRequestDetailPage() {
             </Card>
 
             {/* Photo */}
-            {request.photoUrl && (
+            {request.photo && (
               <Card>
                 <CardBody>
                   <h3 className="text-sm font-medium text-gray-500 mb-3">
                     Foto Sampah
                   </h3>
                   <img
-                    src={request.photoUrl}
+                    src={request.photo}
                     alt="Foto sampah"
                     className="w-full rounded-lg"
                   />
@@ -246,7 +246,7 @@ export default function DepositRequestDetailPage() {
                     <p className="font-medium mb-1">Informasi</p>
                     <p>
                       Admin akan menghubungi Anda melalui nomor telepon yang
-                      terdaftar untuk konfirmasi jadwal penjemputan.
+                      terdaftar untuk konfirmasi jadwal pengepulan.
                     </p>
                   </div>
                 </div>
