@@ -246,7 +246,7 @@ export default function DepositRequestDetailPage() {
                     <p className="font-medium mb-1">Informasi</p>
                     <p>
                       Admin akan menghubungi Anda melalui nomor telepon yang
-                      terdaftar untuk konfirmasi jadwal penjemputan.
+                      terdaftar untuk konfirmasi jadwal pengepulan.
                     </p>
                   </div>
                 </div>

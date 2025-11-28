@@ -40,10 +40,8 @@ const registerSchema = z
       .nullable(),
     phone: z
       .string()
-      .min(6, "Nomor telepon minimal 6 karakter")
-      .max(20, "Nomor telepon maksimal 20 karakter")
-      .optional()
-      .nullable(),
+      .min(9, "Nomor telepon minimal 9 karakter")
+      .max(20, "Nomor telepon maksimal 20 karakter"),
     alamat: z
       .string()
       .min(5, "Alamat minimal 5 karakter")
@@ -157,7 +155,7 @@ export const RegisterForm: React.FC = () => {
       <Input
         {...register("phone")}
         type="tel"
-        label="Nomor Telepon (Opsional)"
+        label="Nomor Telepon"
         placeholder="08xxxxxxxxxx"
         error={errors.phone?.message}
         className="text-gray-600"

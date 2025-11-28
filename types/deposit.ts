@@ -4,8 +4,8 @@
 export enum DepositRequestStatus {
   PENDING = "pending",
   APPROVED = "approved",
-  REJECTED = "rejected",
   COMPLETED = "completed",
+  REJECTED = "rejected",
   CANCELLED = "cancelled",
 }
 
@@ -26,6 +26,13 @@ export interface DepositRequest {
  * Deposit request with user and RW information
  */
 export interface DepositRequestDetail extends DepositRequest {
+  request_id: number;
+  user_id: number;
+  rw_id: number;
+  photo: string | null;
+  status: DepositRequestStatus;
+  scheduled_date: string | null;
+  created_at: string;
   user: {
     user_id: number;
     name: string;
@@ -78,7 +85,7 @@ export interface DepositRequestItem {
  */
 export interface CreateDepositRequest {
   items: DepositRequestItem[];
-  photo?: File;
+  photoUrl?: File;
 }
 
 /**

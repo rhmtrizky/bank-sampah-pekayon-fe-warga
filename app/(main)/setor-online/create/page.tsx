@@ -26,7 +26,7 @@ export default function CreateDepositRequestPage() {
    */
   const handleSubmit = async (
     data: { items: { waste_type_id: number; weight_kg: number }[] },
-    photo?: File
+    photoUrl: string | undefined
   ): Promise<void> => {
     if (!user?.rw) {
       setError("RW tidak ditemukan.");
@@ -35,23 +35,15 @@ export default function CreateDepositRequestPage() {
 
     setIsLoading(true);
     setError(null);
-    console.log("Submitting deposit request:", data, photo);
+    console.log("Submitting deposit request:", data, photoUrl);
 
     try {
-      const formData = new FormData();
-
-      // Add rw_id from user context
-      formData.append("rw_id", user.rw.toString());
-
-      // Add items as JSON string
-      formData.append("items", JSON.stringify(data.items));
-
-      // Add photo if provided
-      if (photo) {
-        formData.append("photo", photo);
-      }
-
-      await post<ApiResponse<DepositRequest>>("/deposit-request", formData);
+      const newDeposit = {
+        rw_id: user.rw,
+        items: data.items,
+        photo_url: photoUrl,
+      };
+      await post<ApiResponse<DepositRequest>>("/deposit-request", newDeposit);
 
       // Success - redirect to list
       router.push("/setor-online?success=true");

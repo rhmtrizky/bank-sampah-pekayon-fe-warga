@@ -22,10 +22,9 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-40 w-full transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100 supports-backdrop-filter:bg-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          
           {/* Brand / Logo Section */}
-          <div 
-            className="flex items-center gap-3 cursor-pointer group" 
+          <div
+            className="flex items-center gap-3 cursor-pointer group"
             onClick={() => router.push("/home")}
           >
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-linear-to-tr from-green-500 to-emerald-600 shadow-lg shadow-green-500/20 group-hover:shadow-green-500/30 transition-all duration-300 group-hover:scale-105">
@@ -44,14 +43,17 @@ export const Header: React.FC = () => {
               </svg>
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-gray-900 leading-tight">Bank Sampah</h1>
-              <p className="text-[10px] font-semibold tracking-wider text-green-600 uppercase">Kel. Pekayon</p>
+              <h1 className="text-lg font-bold text-gray-900 leading-tight">
+                Bank Sampah
+              </h1>
+              <p className="text-[10px] font-semibold tracking-wider text-green-600 uppercase">
+                Kel. Pekayon
+              </p>
             </div>
           </div>
 
           {/* Right Actions: Notifications & Profile */}
           <div className="flex items-center gap-2 sm:gap-4">
-            
             {/* Notifications Button */}
             <button
               onClick={() => router.push("/notifikasi")}
@@ -80,9 +82,8 @@ export const Header: React.FC = () => {
 
             {/* User Profile & Logout */}
             <div className="flex items-center gap-2 pl-1">
-              
               {/* Profile Info */}
-              <button 
+              <button
                 onClick={() => router.push("/profil")}
                 className="flex items-center gap-3 p-1 pr-3 rounded-full hover:bg-gray-50 transition-all duration-200 group text-left"
               >
@@ -96,7 +97,9 @@ export const Header: React.FC = () => {
                   <p className="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
                     {user?.name || "Warga"}
                   </p>
-                  <p className="text-[10px] text-gray-500 font-medium">Warga Aktif</p>
+                  <p className="text-[10px] text-gray-500 font-medium">
+                    Warga Aktif
+                  </p>
                 </div>
               </button>
 
@@ -122,7 +125,6 @@ export const Header: React.FC = () => {
                 <span className="hidden sm:inline">Keluar</span>
               </button>
             </div>
-
           </div>
         </div>
       </div>
